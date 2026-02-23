@@ -19,7 +19,7 @@ namespace BibliotecaApiV2.Handlers.Commands
             Author author = new Author(request.AuthorData.Name, request.AuthorData.Description);
 
             await _authorRepo.AddAsync(author);
-            await _authorRepo.SaveChanges();
+            await _authorRepo.SaveChangesAsync();
 
             return new Unit();
         }

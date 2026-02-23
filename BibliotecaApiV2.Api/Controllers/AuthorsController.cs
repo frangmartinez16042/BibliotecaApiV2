@@ -2,6 +2,8 @@
 using BibliotecaApiV2.Core;
 using BibliotecaApiV2.Core.Commands;
 using BibliotecaApiV2.Core.Dtos.Inputs;
+using BibliotecaApiV2.Core.Dtos.Outputs;
+using BibliotecaApiV2.Core.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography.Xml;
@@ -35,6 +37,24 @@ namespace BibliotecaApiV2.Api.Controllers
             await _mediator.Send(command);
 
             return Ok();
+        }
+
+        /// <summary>
+        /// obteiene un <see cref="Author"/>
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpGet("{id}")]
+        public async Task<ActionResult<AuthorOutput>> GetById([FromRoute] string id)
+        {
+            GetAuthorById query = new GetAuthorById(id);
+            Author author = await _mediator.Send(query);
+            AuthorOutput authorOutput = _mapper.Map<AuthorOutput>(author);
+            
+
+            return Ok(authorOutput);
         }
     }
 }

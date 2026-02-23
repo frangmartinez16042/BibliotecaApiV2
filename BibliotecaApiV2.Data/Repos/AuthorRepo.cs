@@ -1,15 +1,13 @@
 ﻿using BibliotecaApiV2.Core;
 using BibliotecaApiV2.Core.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace BibliotecaApiV2.Data.Repos
 {
-    public class AuthorRepo : IAuthorRepo
+    public class AuthorRepo : BaseRepo<string, Author>, IAuthorRepo
     {
-        private readonly BibliotecaDbContext _context;
-
-        public AuthorRepo(BibliotecaDbContext context)
+        public AuthorRepo(BibliotecaDbContext context) : base(context)
         {
-            _context = context;
         }
 
         public async Task AddAsync(Author author)
@@ -20,6 +18,11 @@ namespace BibliotecaApiV2.Data.Repos
         public async Task<Author?> GetById(string id)
         {
             return _context.Authors.FirstOrDefault(x => x.Id == id);
+        }
+
+        public async override Task<Author?> GetByIdAsync(string id)
+        {
+            return await _context.Authors.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task SaveChanges()
