@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="BibliotecaApiV2.Api/BibliotecaApiV2.Api.csproj" />
+  <Project Path="BibliotecaApiV2.Core/BibliotecaApiV2.Core.csproj" />
+  <Project Path="BibliotecaApiV2.Data/BibliotecaApiV2.Data.csproj" />
+  <Project Path="BibliotecaApiV2.Handlers/BibliotecaApiV2.Handlers.csproj" />
+</Solution>
