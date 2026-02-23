@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BibliotecaApiV2.Core;
 using BibliotecaApiV2.Core.Commands;
 using BibliotecaApiV2.Core.Dtos.Inputs;
 using MediatR;

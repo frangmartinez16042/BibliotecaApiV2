@@ -5,6 +5,7 @@ using BibliotecaApiV2.Data.Repos;
 using BibliotecaApiV2.Handlers.MappingProfiles;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +25,16 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IAuthorRepo, AuthorRepo>();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerGen(options =>
+{
+    var xmlPath = Path.Combine(
+        AppContext.BaseDirectory,
+        $"{Assembly.GetExecutingAssembly().GetName().Name}.xml");
+
+    options.IncludeXmlComments(xmlPath);
+});
 
 var app = builder.Build();
 var sp = app.Services.CreateScope().ServiceProvider;
